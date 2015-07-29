@@ -2041,6 +2041,14 @@ namespace WebSocketSharp
         null);
     }
 
+	public bool Ping (TimeSpan waitTime)
+	{
+		var bytes = _client
+			? WebSocketFrame.CreatePingFrame (true).ToByteArray ()
+			: WebSocketFrame.EmptyUnmaskPingBytes;
+
+		return Ping (bytes, waitTime);
+	}
     /// <summary>
     /// Sends a Ping using the WebSocket connection.
     /// </summary>
